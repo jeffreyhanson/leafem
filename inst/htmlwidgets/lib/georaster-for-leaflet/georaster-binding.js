@@ -162,7 +162,7 @@ LeafletWidget.methods.addCOG = function (url,
       resolution: resolution,
       opacity: opacity,
       pixelValuesToColorFn: pixelValuesToColorFn,
-      resampleMethod: "average",
+      resampleMethod: "bilinear",
       pane: pane
     });
     map.layerManager.addLayer(layers[layerId], null, layerId, group);
