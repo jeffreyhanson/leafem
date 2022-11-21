@@ -14,6 +14,7 @@ addGeoRaster(
   options = leaflet::tileOptions(),
   colorOptions = NULL,
   project = TRUE,
+  method = "near",
   pixelValuesToColorFn = NULL,
   autozoom = TRUE,
   ...
@@ -42,6 +43,9 @@ See \code{\link[leaflet]{tileOptions}} for details.}
 \item{project}{whether to project the RasterLayer to conform with leaflets
 expected crs. Defaults to \code{TRUE} and things are likely to go haywire
 if set to \code{FALSE}.}
+
+\item{method}{character defining the resampling method to be used. Available
+options include `near` and `bilinear`.}
 
 \item{pixelValuesToColorFn}{optional JS function to be passed to the browser.
 Can be used to fine tune and manipulate the color mapping.

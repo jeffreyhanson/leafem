@@ -11,6 +11,7 @@ addCOG(
   layerId = NULL,
   resolution = 96,
   opacity = 0.8,
+  method = "near",
   options = leaflet::tileOptions(),
   colorOptions = NULL,
   pixelValuesToColorFn = NULL,
@@ -34,6 +35,9 @@ but may impact performance. Default is 96 (pixels).}
 
 \item{opacity}{image opacity.}
 
+\item{method}{character defining the resampling method to be used. Available
+options include `near` and `bilinear`.}
+
 \item{options}{see [leaflet](tileOptions).}
 
 \item{colorOptions}{list defining the palette, breaks and na.color to be used.
@@ -42,7 +46,7 @@ Currently not used.}
 \item{pixelValuesToColorFn}{optional JS function to be passed to the browser.
 Can be used to fine tune and manipulate the color mapping.
 See examples & \url{https://github.com/r-spatial/leafem/issues/25} for
-some examples. Currently not used.}
+some examples.}
 
 \item{autozoom}{whether to automatically zoom to the full extent of the layer.
 Default is \code{TRUE}.}

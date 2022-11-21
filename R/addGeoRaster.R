@@ -21,6 +21,8 @@
 #' @param project whether to project the RasterLayer to conform with leaflets
 #'   expected crs. Defaults to \code{TRUE} and things are likely to go haywire
 #'   if set to \code{FALSE}.
+#' @param method character defining the resampling method to be used. Available
+#' options include `near` and `bilinear`.
 #' @param pixelValuesToColorFn optional JS function to be passed to the browser.
 #'   Can be used to fine tune and manipulate the color mapping.
 #'   See \url{https://github.com/r-spatial/leafem/issues/25} for some examples.
@@ -64,6 +66,7 @@ addGeoRaster = function(map,
                         options = leaflet::tileOptions(),
                         colorOptions = NULL,
                         project = TRUE,
+                        method = "near",
                         pixelValuesToColorFn = NULL,
                         autozoom = TRUE,
                         ...) {
@@ -98,6 +101,7 @@ addGeoRaster = function(map,
     , colorOptions = colorOptions
     , pixelValuesToColorFn = pixelValuesToColorFn
     , autozoom = autozoom
+    , method = method
   )
 
 }
@@ -111,8 +115,7 @@ addGeoRaster = function(map,
 #' The GeoTIFF file is read directly in the browser using geotiffjs
 #' (\url{https://geotiffjs.github.io/}), so there's no need to read data into
 #' the current R session. GeoTIFF files can be read from the file system or via url.
-#' The clue is that rendering uses simple nearest neighbor interpolation on-the-fly
-#' to ensure smooth rendering. This enables handling of larger rasters than with
+#' The clue is that rendering uses on-the-fly interpolation to ensure smooth rendering. This enables handling of larger rasters than with
 #' the standard \code{\link[leaflet]{addRasterImage}}.
 #'
 #' @param map the map to add the raster data to.
@@ -129,10 +132,8 @@ addGeoRaster = function(map,
 #' @param project if TRUE (default), automatically project x to the map projection
 #'   expected by georaster-layer-for-leaflet (EPSG:4326);
 #'   if FALSE, it's the caller's responsibility to ensure that \code{file} is already projected.
-#' @param method character defining the resampling method to be used when
-#' \code{project} is \code{TRUE}.
-#' See \url{https://gdal.org/programs/gdalwarp.html#cmdoption-gdalwarp-r} for
-#' possible values.
+#' @param method character defining the resampling method to be used. Available
+#' options include `near` and `bilinear`.
 #' @param opacity opacity of the rendered layer.
 #' @param options options to be passed to the layer.
 #'   See \code{\link[leaflet]{tileOptions}} for details.
@@ -188,7 +189,7 @@ addGeotiff = function(map,
                       bands = NULL,
                       arith = NULL,
                       project = TRUE,
-                      method = NULL,
+                      method = "near",
                       opacity = 0.8,
                       options = leaflet::tileOptions(),
                       colorOptions = NULL,
@@ -285,6 +286,7 @@ addGeotiff = function(map,
       , rgb
       , pixelValuesToColorFn
       , autozoom
+      , ifelse(identical(method, "near"), "nearest", method)
     )
   } else {
     map$dependencies <- c(
@@ -309,6 +311,7 @@ addGeotiff = function(map,
       , rgb
       , pixelValuesToColorFn
       , autozoom
+      , ifelse(identical(method, "near"), "nearest", method)
     )
   }
 
@@ -332,13 +335,15 @@ addGeotiff = function(map,
 #'   interpolation. Larger values will result in more detailed rendering,
 #'   but may impact performance. Default is 96 (pixels).
 #' @param opacity image opacity.
+#' @param method character defining the resampling method to be used. Available
+#' options include `near` and `bilinear`.
 #' @param options see [leaflet](tileOptions).
 #' @param colorOptions list defining the palette, breaks and na.color to be used.
 #'   Currently not used.
 #' @param pixelValuesToColorFn optional JS function to be passed to the browser.
 #'   Can be used to fine tune and manipulate the color mapping.
 #'   See examples & \url{https://github.com/r-spatial/leafem/issues/25} for
-#'   some examples. Currently not used.
+#'   some examples.
 #' @param autozoom whether to automatically zoom to the full extent of the layer.
 #'   Default is \code{TRUE}.
 #' @param rgb logical, whether to render Geotiff as RGB. Currently not used.
@@ -373,6 +378,7 @@ addCOG = function(map,
                   layerId = NULL,
                   resolution = 96,
                   opacity = 0.8,
+                  method = "near",
                   options = leaflet::tileOptions(),
                   colorOptions = NULL, #colorOptions(),
                   pixelValuesToColorFn = NULL,
@@ -400,6 +406,7 @@ addCOG = function(map,
     , pixelValuesToColorFn
     , autozoom
     , rgb
+    , ifelse(identical(method, "near"), "nearest", method)
   )
 }
 

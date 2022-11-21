@@ -14,7 +14,7 @@ addGeotiff(
   bands = NULL,
   arith = NULL,
   project = TRUE,
-  method = NULL,
+  method = "near",
   opacity = 0.8,
   options = leaflet::tileOptions(),
   colorOptions = NULL,
@@ -48,10 +48,8 @@ Will be computed on-the-fly in the browser.}
 expected by georaster-layer-for-leaflet (EPSG:4326);
 if FALSE, it's the caller's responsibility to ensure that \code{file} is already projected.}
 
-\item{method}{character defining the resampling method to be used when
-\code{project} is \code{TRUE}.
-See \url{https://gdal.org/programs/gdalwarp.html#cmdoption-gdalwarp-r} for
-possible values.}
+\item{method}{character defining the resampling method to be used. Available
+options include `near` and `bilinear`.}
 
 \item{opacity}{opacity of the rendered layer.}
 
@@ -84,8 +82,7 @@ See \url{https://github.com/GeoTIFF/georaster-layer-for-leaflet} for details.
 The GeoTIFF file is read directly in the browser using geotiffjs
 (\url{https://geotiffjs.github.io/}), so there's no need to read data into
 the current R session. GeoTIFF files can be read from the file system or via url.
-The clue is that rendering uses simple nearest neighbor interpolation on-the-fly
-to ensure smooth rendering. This enables handling of larger rasters than with
+The clue is that rendering uses on-the-fly interpolation to ensure smooth rendering. This enables handling of larger rasters than with
 the standard \code{\link[leaflet]{addRasterImage}}.
 }
 \examples{

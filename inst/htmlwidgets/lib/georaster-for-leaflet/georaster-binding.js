@@ -9,7 +9,8 @@ LeafletWidget.methods.addGeotiff = function (url,
                                              colorOptions,
                                              rgb,
                                              pixelValuesToColorFn,
-                                             autozoom) {
+                                             autozoom,
+                                             method) {
 
   var map = this;
 
@@ -120,7 +121,8 @@ LeafletWidget.methods.addGeotiff = function (url,
           pixelValuesToColorFn: pixelValuesToColorFn,
           resolution: resolution,
           opacity: opacity,
-          pane: pane
+          pane: pane,
+          resampleMethod: method
         });
         map.layerManager.addLayer(layer, null, layerId, group);
 
@@ -142,7 +144,8 @@ LeafletWidget.methods.addCOG = function (url,
                                          colorOptions,
                                          pixelValuesToColorFn,
                                          autozoom,
-                                         rgb) {
+                                         rgb,
+                                         method) {
 
   var map = this;
   var pane;  // could also use let
@@ -162,7 +165,8 @@ LeafletWidget.methods.addCOG = function (url,
       resolution: resolution,
       opacity: opacity,
       pixelValuesToColorFn: pixelValuesToColorFn,
-      pane: pane
+      pane: pane,
+      resampleMethod: method
     });
     map.layerManager.addLayer(layers[layerId], null, layerId, group);
 
@@ -243,4 +247,3 @@ LeafletWidget.methods.addCOG = function (url,
         Just make sure to include the georaster option!
         http://leafletjs.com/reference-1.2.0.html#gridlayer
     */
-
