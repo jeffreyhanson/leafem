@@ -1,7 +1,7 @@
 Package: leafem
 Type: Package
 Title: 'leaflet' Extensions for 'mapview'
-Version: 0.2.0.9011
+Version: 0.2.0.9012
 Authors@R:
     c(person(given = "Tim",
              family = "Appelhans",
@@ -20,11 +20,11 @@ Authors@R:
              email = "Debugger@jedimasters.de"),
       person(given = "Daniel",
              family = "Montague",
-             role = c("ctb", "cph"), 
+             role = c("ctb", "cph"),
              comment = "Leaflet.EasyButton plugin"),
       person(given = "Lorenzo",
              family = "Busetto",
-             role = c("ctb"), 
+             role = c("ctb"),
              email = "lbusett@gmail.com"),
       person(given = "Luigi",
              family = "Ranghetti",
@@ -47,18 +47,18 @@ Authors@R:
       person(given = "Yeedle",
              family = "Neuwirth",
              role = "ctb"),
-      person(given = "Kevin",  
-             family = "Cazelles", 
+      person(given = "Kevin",
+             family = "Cazelles",
              role = "ctb",
-             email = "kevin.cazelles@gmail.com", 
+             email = "kevin.cazelles@gmail.com",
              comment = c(ORCID = "0000-0001-6619-9874")))
 Maintainer: Tim Appelhans <tim.appelhans@gmail.com>
-Description: Provides extensions for packages 'leaflet' & 'mapdeck', 
-    many of which are used by package 'mapview'. 
-    Focus is on functionality readily available in 
+Description: Provides extensions for packages 'leaflet' & 'mapdeck',
+    many of which are used by package 'mapview'.
+    Focus is on functionality readily available in
     Geographic Information Systems such as 'Quantum GIS'. Includes functions
-    to display coordinates of mouse pointer position, query image values via 
-    mouse pointer and zoom-to-layer buttons. Additionally, provides a feature 
+    to display coordinates of mouse pointer position, query image values via
+    mouse pointer and zoom-to-layer buttons. Additionally, provides a feature
     type agnostic function to add points, lines, polygons to a map.
 License: MIT + file LICENSE
 URL: https://github.com/r-spatial/leafem,
